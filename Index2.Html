@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipZone</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .search-container {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+        .search-container input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-container button {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+            background-color: #666;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .video-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .video {
+            width: 300px;
+            height: 400px;
+            background-color: #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            position: relative;
+        }
+        .video-actions {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .video-actions button {
+            background-color: #444;
+            border: none;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .video-actions button:hover {
+            background-color: #666;
+        }
+        .video-actions button.heart {
+            background-color: #e74c3c;
+        }
+        .footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ddd;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 50px;
+        }
+        .navbar a {
+            color: #000;
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #bbb;
+        }
+        .upload-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .upload-input {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ClipZone</h1>
+        <p>Your entertainment hub</p>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </div>
+    <div class="content">
+        <div id="home">
+            <h2>Home</h2>
+            <div class="video-grid">
+                <div class="video">
+                    Video 1
+                    <div class="video-actions">
+                        <button class="heart">&#10084;</button>
+                        <button>Follow</button>
+                        <button>Share</button>
+                        <button>Favorite</button>
+                        <button>Comment</button>
+                    </div>
+                </div>
+                <div class="video">
+                    Video 2
+                    <div class="video-actions">
+                        <button class="heart">&#10084;</button>
+                        <button>Follow</button>
+                        <button>Share</button>
+                        <button>Favorite</button>
+                        <button>Comment</button>
+                    </div>
+                </div>
+                <div class="video">
+                    Video 3
+                    <div class="video-actions">
+                        <button class="heart">&#10084;</button>
+                        <button>Follow</button>
+                        <button>Share</button>
+                        <button>Favorite</button>
+                        <button>Comment</button>
+                    </div>
+                </div>
+                <!-- Add more videos as needed -->
+            </div>
+        </div>
+        <div id="profile" style="display:none;">
+            <h2>Video Profile</h2>
+            <p>Profile details and user's videos go here.</p>
+        </div>
+        <div id="inbox" style="display:none;">
+            <h2>Inbox</h2>
+            <p>Messages and notifications will appear here.</p>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="#home" onclick="showSection('home')">Home</a>
+        <a href="#profile" onclick="showSection('profile')">Video Profile</a>
+        <a href="#inbox" onclick="showSection('inbox')">Inbox</a>
+        <button class="upload-btn" onclick="toggleUpload()">Upload Video</button>
+    </div>
+    <input type="file" class="upload-input" id="uploadInput">
+    <div class="footer">
+        <p>&copy; 2024 ClipZone. All rights reserved.</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('profile').style.display = 'none';
+            document.getElementById('inbox').style.display = 'none';
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function toggleUpload() {
+            const uploadInput = document.getElementById('uploadInput');
+            if (uploadInput.style.display === 'none' || uploadInput.style.display === '') {
+                uploadInput.style.display = 'block';
+            } else {
+                uploadInput.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
